@@ -144,7 +144,13 @@ class TestTypeData {
     final newGroupContent = groupContent.replaceAll(
       r'''
       final object = SimpleClass.fromJson({});
-      expect(loudEncode(object), loudEncode(_nullableDefaultOutput));''',
+      final encoded = loudEncode(object);
+
+      expect(encoded, loudEncode(_nullableDefaultOutput));
+      final object2 = SimpleClass.fromJson(
+        jsonDecode(encoded) as Map<String, Object?>,
+      );
+      expect(loudEncode(object2), encoded);''',
       '''
       expect(
         () => loudEncode(SimpleClass.fromJson({})),

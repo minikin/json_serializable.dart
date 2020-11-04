@@ -6,6 +6,8 @@
 
 // ignore_for_file: prefer_const_declarations
 
+import 'dart:convert';
+
 @TestOn('vm')
 import 'package:test/test.dart';
 
@@ -16,7 +18,14 @@ void main() {
   group('non-nullable', () {
     test('round trip', () {
       final object = SimpleClass.fromJson(_defaultInput);
-      expect(loudEncode(object), loudEncode(_defaultOutput));
+      final encoded = loudEncode(object);
+
+      expect(encoded, loudEncode(_defaultOutput));
+
+      final object2 = SimpleClass.fromJson(
+        jsonDecode(encoded) as Map<String, Object?>,
+      );
+      expect(loudEncode(object2), encoded);
     });
 
     test('round trip null', () {
@@ -28,26 +37,53 @@ void main() {
 
     test('round trip alternate values', () {
       final object = SimpleClass.fromJson(_nonDefaultJson);
-      expect(loudEncode(object), loudEncode(_nonDefaultJson));
-      expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
+      final encoded = loudEncode(object);
+
+      expect(encoded, loudEncode(_nonDefaultJson));
+      expect(encoded, isNot(loudEncode(_defaultOutput)));
+
+      final object2 = SimpleClass.fromJson(
+        jsonDecode(encoded) as Map<String, Object?>,
+      );
+      expect(loudEncode(object2), encoded);
     });
   }); // end non-nullable group
 
   group('nullable', () {
     test('round trip', () {
       final object = SimpleClassNullable.fromJson(_defaultInput);
-      expect(loudEncode(object), loudEncode(_defaultOutput));
+      final encoded = loudEncode(object);
+
+      expect(encoded, loudEncode(_defaultOutput));
+
+      final object2 = SimpleClassNullable.fromJson(
+        jsonDecode(encoded) as Map<String, Object?>,
+      );
+      expect(loudEncode(object2), encoded);
     });
 
     test('round trip null', () {
       final object = SimpleClassNullable.fromJson({});
-      expect(loudEncode(object), loudEncode(_nullableDefaultOutput));
+      final encoded = loudEncode(object);
+
+      expect(encoded, loudEncode(_nullableDefaultOutput));
+      final object2 = SimpleClassNullable.fromJson(
+        jsonDecode(encoded) as Map<String, Object?>,
+      );
+      expect(loudEncode(object2), encoded);
     });
 
     test('round trip alternate values', () {
       final object = SimpleClassNullable.fromJson(_nonDefaultJson);
-      expect(loudEncode(object), loudEncode(_nonDefaultJson));
-      expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
+      final encoded = loudEncode(object);
+
+      expect(encoded, loudEncode(_nonDefaultJson));
+      expect(encoded, isNot(loudEncode(_defaultOutput)));
+
+      final object2 = SimpleClassNullable.fromJson(
+        jsonDecode(encoded) as Map<String, Object?>,
+      );
+      expect(loudEncode(object2), encoded);
     });
   }); // end nullable group
 }
