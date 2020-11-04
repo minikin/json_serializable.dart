@@ -126,12 +126,7 @@ class TestTypeData {
     }
   }
 
-  String testContent(String sourceContent, String type) => Replacement.generate(
-        _nullableParty(sourceContent),
-        _testReplacements(type),
-      );
-
-  String _nullableParty(String sourceContent) {
+  String testContent(String sourceContent, String type) {
     const groupStart = "\n  group('non-nullable', () {";
     const groupEnd = '}); // end non-nullable group\n';
 
@@ -144,21 +139,28 @@ class TestTypeData {
         .replaceAll('non-nullable', 'nullable')
         .replaceAll('SimpleClass', 'SimpleClassNullable');
 
-    return [
-      sourceContent.substring(0, startIndex),
-      groupContent.replaceAll(
-        r'''
+    final newGroupContent = groupContent.replaceAll(
+      r'''
       final object = SimpleClass.fromJson({});
       expect(loudEncode(object), loudEncode(_nullableDefaultOutput));''',
-        r'''
+      r'''
       expect(
         () => loudEncode(SimpleClass.fromJson({})),
         throwsA(isA<TypeError>()),
       );''',
-      ),
+    );
+
+    final updatedSourceContent = [
+      sourceContent.substring(0, startIndex),
+      newGroupContent,
       nullableGroupContent,
       sourceContent.substring(endIndex),
     ].join();
+
+    return Replacement.generate(
+      updatedSourceContent,
+      _testReplacements(type),
+    );
   }
 
   Iterable<Replacement> _testReplacements(String type) sync* {
