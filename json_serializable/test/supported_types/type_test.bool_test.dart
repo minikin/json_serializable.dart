@@ -13,16 +13,43 @@ import '../test_utils.dart';
 import 'input.type_bool.dart';
 
 void main() {
-  test('round trip', () {
-    final object = SimpleClass.fromJson(_defaultInput);
-    expect(loudEncode(object), loudEncode(_defaultOutput));
-  });
+  group('non-nullable', () {
+    test('round trip', () {
+      final object = SimpleClass.fromJson(_defaultInput);
+      expect(loudEncode(object), loudEncode(_defaultOutput));
+    });
 
-  test('round trip alternate values', () {
-    final object = SimpleClass.fromJson(_nonDefaultJson);
-    expect(loudEncode(object), loudEncode(_nonDefaultJson));
-    expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
-  });
+    test('round trip null', () {
+      expect(
+        () => loudEncode(SimpleClass.fromJson({})),
+        throwsA(isA<TypeError>()),
+      );
+    });
+
+    test('round trip alternate values', () {
+      final object = SimpleClass.fromJson(_nonDefaultJson);
+      expect(loudEncode(object), loudEncode(_nonDefaultJson));
+      expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
+    });
+  }); // end non-nullable group
+
+  group('nullable', () {
+    test('round trip', () {
+      final object = SimpleClassNullable.fromJson(_defaultInput);
+      expect(loudEncode(object), loudEncode(_defaultOutput));
+    });
+
+    test('round trip null', () {
+      final object = SimpleClassNullable.fromJson({});
+      expect(loudEncode(object), loudEncode(_nullableDefaultOutput));
+    });
+
+    test('round trip alternate values', () {
+      final object = SimpleClassNullable.fromJson(_nonDefaultJson);
+      expect(loudEncode(object), loudEncode(_nonDefaultJson));
+      expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
+    });
+  }); // end nullable group
 }
 
 final _defaultValue = true;
@@ -34,6 +61,11 @@ final _defaultInput = <String, Object?>{
 
 final _defaultOutput = {
   'value': _defaultValue,
+  'withDefault': _defaultValue,
+};
+
+final _nullableDefaultOutput = {
+  'value': null,
   'withDefault': _defaultValue,
 };
 

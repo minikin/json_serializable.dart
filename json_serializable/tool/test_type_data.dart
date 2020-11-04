@@ -127,9 +127,39 @@ class TestTypeData {
   }
 
   String testContent(String sourceContent, String type) => Replacement.generate(
-        sourceContent,
+        _nullableParty(sourceContent),
         _testReplacements(type),
       );
+
+  String _nullableParty(String sourceContent) {
+    const groupStart = "\n  group('non-nullable', () {";
+    const groupEnd = '}); // end non-nullable group\n';
+
+    final startIndex = sourceContent.indexOf(groupStart);
+    final endIndex = sourceContent.indexOf(groupEnd) + groupEnd.length;
+
+    final groupContent = sourceContent.substring(startIndex, endIndex);
+
+    final nullableGroupContent = groupContent
+        .replaceAll('non-nullable', 'nullable')
+        .replaceAll('SimpleClass', 'SimpleClassNullable');
+
+    return [
+      sourceContent.substring(0, startIndex),
+      groupContent.replaceAll(
+        r'''
+      final object = SimpleClass.fromJson({});
+      expect(loudEncode(object), loudEncode(_nullableDefaultOutput));''',
+        r'''
+      expect(
+        () => loudEncode(SimpleClass.fromJson({})),
+        throwsA(isA<TypeError>()),
+      );''',
+      ),
+      nullableGroupContent,
+      sourceContent.substring(endIndex),
+    ].join();
+  }
 
   Iterable<Replacement> _testReplacements(String type) sync* {
     yield Replacement(

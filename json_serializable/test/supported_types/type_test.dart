@@ -13,16 +13,23 @@ import '../test_utils.dart';
 import 'input.dart';
 
 void main() {
-  test('round trip', () {
-    final object = SimpleClass.fromJson(_defaultInput);
-    expect(loudEncode(object), loudEncode(_defaultOutput));
-  });
+  group('non-nullable', () {
+    test('round trip', () {
+      final object = SimpleClass.fromJson(_defaultInput);
+      expect(loudEncode(object), loudEncode(_defaultOutput));
+    });
 
-  test('round trip alternate values', () {
-    final object = SimpleClass.fromJson(_nonDefaultJson);
-    expect(loudEncode(object), loudEncode(_nonDefaultJson));
-    expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
-  });
+    test('round trip null', () {
+      final object = SimpleClass.fromJson({});
+      expect(loudEncode(object), loudEncode(_nullableDefaultOutput));
+    });
+
+    test('round trip alternate values', () {
+      final object = SimpleClass.fromJson(_nonDefaultJson);
+      expect(loudEncode(object), loudEncode(_nonDefaultJson));
+      expect(loudEncode(object), isNot(loudEncode(_defaultOutput)));
+    });
+  }); // end non-nullable group
 }
 
 final _defaultValue = 42;
@@ -34,6 +41,11 @@ final _defaultInput = <String, Object?>{
 
 final _defaultOutput = {
   'value': _defaultValue,
+  'withDefault': _defaultValue,
+};
+
+final _nullableDefaultOutput = {
+  'value': null,
   'withDefault': _defaultValue,
 };
 
