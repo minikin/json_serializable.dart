@@ -76,7 +76,7 @@ class _SimpleConverter<T> implements JsonConverter<T, Map<String, dynamic>> {
   const _SimpleConverter();
 
   @override
-  T fromJson(Map<String, dynamic> json) => json['value'] as T;
+  T fromJson(Map<String, Object?> json) => json['value'] as T;
 
   @override
   Map<String, dynamic> toJson(T object) => {'value': object};

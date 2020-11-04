@@ -7,7 +7,7 @@ part of 'null_safety.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Person _$PersonFromJson(Map<String, dynamic> json) {
+Person _$PersonFromJson(Map<String, Object?> json) {
   return Person(
     firstName: json['firstName'] as String,
     lastName: json['lastName'] as String,
@@ -15,12 +15,12 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['dateOfBirth'] as String),
   )..nullableListOfNullableInt =
-      (json['nullableListOfNullableInt'] as List<dynamic>?)
+      (json['nullableListOfNullableInt'] as List<Object?>?)
           ?.map((e) => e as int?)
           .toList();
 }
 
-Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
+Map<String, Object?> _$PersonToJson(Person instance) => <String, Object?>{
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),

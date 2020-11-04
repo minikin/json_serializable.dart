@@ -7,30 +7,30 @@ part of 'default_value.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DefaultValue _$DefaultValueFromJson(Map<String, dynamic> json) {
+DefaultValue _$DefaultValueFromJson(Map<String, Object?> json) {
   return DefaultValue(
     json['fieldBool'] as bool? ?? true,
     json['fieldString'] as String? ?? 'string',
     json['fieldInt'] as int? ?? 42,
     (json['fieldDouble'] as num?)?.toDouble() ?? 3.14,
-    json['fieldListEmpty'] as List<dynamic>? ?? [],
-    (json['fieldSetEmpty'] as List<dynamic>?)?.toSet() ?? {},
-    json['fieldMapEmpty'] as Map<String, dynamic>? ?? {},
-    (json['fieldListSimple'] as List<dynamic>?)
+    json['fieldListEmpty'] as List<Object?>? ?? [],
+    (json['fieldSetEmpty'] as List<Object?>?)?.toSet() ?? {},
+    json['fieldMapEmpty'] as Map<String, Object?>? ?? {},
+    (json['fieldListSimple'] as List<Object?>?)
             ?.map((e) => e as int)
             .toList() ??
         [1, 2, 3],
-    (json['fieldSetSimple'] as List<dynamic>?)
+    (json['fieldSetSimple'] as List<Object?>?)
             ?.map((e) => e as String)
             .toSet() ??
         {'entry1', 'entry2'},
-    (json['fieldMapSimple'] as Map<String, dynamic>?)?.map(
+    (json['fieldMapSimple'] as Map<String, Object?>?)?.map(
           (k, e) => MapEntry(k, e as int),
         ) ??
         {'answer': 42},
-    (json['fieldMapListString'] as Map<String, dynamic>?)?.map(
+    (json['fieldMapListString'] as Map<String, Object?>?)?.map(
           (k, e) => MapEntry(
-              k, (e as List<dynamic>).map((e) => e as String).toList()),
+              k, (e as List<Object?>).map((e) => e as String).toList()),
         ) ??
         {
           'root': ['child']
@@ -39,8 +39,8 @@ DefaultValue _$DefaultValueFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$DefaultValueToJson(DefaultValue instance) =>
-    <String, dynamic>{
+Map<String, Object?> _$DefaultValueToJson(DefaultValue instance) =>
+    <String, Object?>{
       'fieldBool': instance.fieldBool,
       'fieldString': instance.fieldString,
       'fieldInt': instance.fieldInt,
@@ -79,7 +79,7 @@ T _$enumDecode<T>(
 
 T? _$enumDecodeNullable<T>(
   Map<T, Object> enumValues,
-  dynamic source, {
+  Object? source, {
   T? unknownValue,
 }) {
   if (source == null) {

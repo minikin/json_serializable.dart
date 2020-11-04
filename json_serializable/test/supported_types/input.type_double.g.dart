@@ -7,29 +7,29 @@ part of 'input.type_double.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SimpleClass _$SimpleClassFromJson(Map<String, dynamic> json) {
+SimpleClass _$SimpleClassFromJson(Map<String, Object?> json) {
   return SimpleClass(
     (json['value'] as num).toDouble(),
     (json['withDefault'] as num?)?.toDouble() ?? 3.14,
   );
 }
 
-Map<String, dynamic> _$SimpleClassToJson(SimpleClass instance) =>
-    <String, dynamic>{
+Map<String, Object?> _$SimpleClassToJson(SimpleClass instance) =>
+    <String, Object?>{
       'value': instance.value,
       'withDefault': instance.withDefault,
     };
 
-SimpleClassNullable _$SimpleClassNullableFromJson(Map<String, dynamic> json) {
+SimpleClassNullable _$SimpleClassNullableFromJson(Map<String, Object?> json) {
   return SimpleClassNullable(
     (json['value'] as num?)?.toDouble(),
     (json['withDefault'] as num?)?.toDouble() ?? 3.14,
   );
 }
 
-Map<String, dynamic> _$SimpleClassNullableToJson(
+Map<String, Object?> _$SimpleClassNullableToJson(
         SimpleClassNullable instance) =>
-    <String, dynamic>{
+    <String, Object?>{
       'value': instance.value,
       'withDefault': instance.withDefault,
     };

@@ -15,12 +15,12 @@ Person _$PersonFromJson(Map json) {
         ? null
         : DateTime.parse(json['dateOfBirth'] as String),
   )..nullableListOfNullableInt =
-      (json['nullableListOfNullableInt'] as List<dynamic>?)
+      (json['nullableListOfNullableInt'] as List<Object?>?)
           ?.map((e) => e as int?)
           .toList();
 }
 
-Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
+Map<String, Object?> _$PersonToJson(Person instance) => <String, Object?>{
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),

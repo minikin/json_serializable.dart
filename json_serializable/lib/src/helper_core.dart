@@ -145,7 +145,7 @@ String typeToCode(
   bool forceNullable = false,
 }) {
   if (type.isDynamic) {
-    return 'dynamic';
+    return 'Object?';
   } else if (type is InterfaceType) {
     final typeArguments = type.typeArguments;
     if (typeArguments.isEmpty) {

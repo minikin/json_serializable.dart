@@ -34,14 +34,13 @@ class ValueHelper extends TypeHelper {
     TypeHelperContext context,
     bool defaultProvided,
   ) {
-    if (targetType.isDartCoreObject && !targetType.isNullableType) {
-      final question = defaultProvided ? '?' : '';
-      return '$expression as Object$question';
+    final targetTypeNullable = defaultProvided || targetType.isNullableType;
+    if (targetType.isDartCoreObject && !targetTypeNullable) {
+      return '$expression as Object';
     } else if (targetType.isDartCoreObject || targetType.isDynamic) {
       // just return it as-is. We'll hope it's safe.
       return expression;
     } else if (targetType.isDartCoreDouble) {
-      final targetTypeNullable = defaultProvided || targetType.isNullableType;
       final question = targetTypeNullable ? '?' : '';
       return '($expression as num$question)$question.toDouble()';
     } else if (simpleJsonTypeChecker.isAssignableFromType(targetType)) {

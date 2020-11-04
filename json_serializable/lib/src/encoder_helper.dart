@@ -22,7 +22,7 @@ abstract class EncodeHelper implements HelperCore {
     final buffer = StringBuffer();
 
     final functionName = '${prefix}ToJson${genericClassArgumentsImpl(true)}';
-    buffer.write('Map<String, dynamic> '
+    buffer.write('Map<String, Object?> '
         '$functionName($targetClassReference $_toJsonParamName');
 
     if (config.genericArgumentFactories) {
@@ -53,7 +53,7 @@ abstract class EncodeHelper implements HelperCore {
 
   void _writeToJsonSimple(StringBuffer buffer, Iterable<FieldElement> fields) {
     buffer
-      ..writeln('=> <String, dynamic>{')
+      ..writeln('=> <String, Object?>{')
       ..writeAll(fields.map((field) {
         final access = _fieldAccess(field);
         final value =
@@ -71,7 +71,7 @@ abstract class EncodeHelper implements HelperCore {
   ) {
     buffer
       ..writeln('{')
-      ..writeln('    final $generatedLocalVarName = <String, dynamic>{');
+      ..writeln('    final $generatedLocalVarName = <String, Object?>{');
 
     // Note that the map literal is left open above. As long as target fields
     // don't need to be intercepted by the `only if null` logic, write them
@@ -108,7 +108,7 @@ abstract class EncodeHelper implements HelperCore {
             // write the helper to be used by all following null-excluding
             // fields
             ..writeln('''
-    void $toJsonMapHelperName(String key, dynamic value) {
+    void $toJsonMapHelperName(String key, Object? value) {
       if (value != null) {
         $generatedLocalVarName[key] = value;
       }

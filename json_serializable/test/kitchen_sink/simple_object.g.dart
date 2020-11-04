@@ -13,7 +13,7 @@ SimpleObject _$SimpleObjectFromJson(Map json) {
   );
 }
 
-Map<String, dynamic> _$SimpleObjectToJson(SimpleObject instance) =>
-    <String, dynamic>{
+Map<String, Object?> _$SimpleObjectToJson(SimpleObject instance) =>
+    <String, Object?>{
       'value': instance.value,
     };

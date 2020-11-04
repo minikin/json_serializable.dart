@@ -113,7 +113,7 @@ T _$enumDecode<T>(
 const _enumDecodeHelperNullable = r'''
 T? _$enumDecodeNullable<T>(
   Map<T, Object> enumValues,
-  dynamic source, {
+  Object? source, {
   T? unknownValue,
 }) {
   if (source == null) {

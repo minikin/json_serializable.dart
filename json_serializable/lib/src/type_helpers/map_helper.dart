@@ -83,7 +83,7 @@ class MapHelper extends TypeHelper<TypeHelperContextWithConfig> {
         } else {
           // this is the trivial case. Do a runtime cast to the known type of
           // JSON map values - `Map<String, dynamic>`
-          return '$expression as Map<String, dynamic>$optionalQuestion';
+          return '$expression as Map<String, Object?>$optionalQuestion';
         }
       }
 
@@ -101,7 +101,7 @@ class MapHelper extends TypeHelper<TypeHelperContextWithConfig> {
 
     final itemSubVal = context.deserialize(valueArg, closureArg);
 
-    var mapCast = context.config.anyMap ? 'as Map' : 'as Map<String, dynamic>';
+    var mapCast = context.config.anyMap ? 'as Map' : 'as Map<String, Object?>';
 
     if (targetTypeIsNullable) {
       mapCast += '?';

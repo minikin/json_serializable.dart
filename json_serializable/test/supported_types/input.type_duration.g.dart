@@ -7,25 +7,25 @@ part of 'input.type_duration.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SimpleClass _$SimpleClassFromJson(Map<String, dynamic> json) {
+SimpleClass _$SimpleClassFromJson(Map<String, Object?> json) {
   return SimpleClass(
     Duration(microseconds: json['value'] as int),
   );
 }
 
-Map<String, dynamic> _$SimpleClassToJson(SimpleClass instance) =>
-    <String, dynamic>{
+Map<String, Object?> _$SimpleClassToJson(SimpleClass instance) =>
+    <String, Object?>{
       'value': instance.value.inMicroseconds,
     };
 
-SimpleClassNullable _$SimpleClassNullableFromJson(Map<String, dynamic> json) {
+SimpleClassNullable _$SimpleClassNullableFromJson(Map<String, Object?> json) {
   return SimpleClassNullable(
     json['value'] == null ? null : Duration(microseconds: json['value'] as int),
   );
 }
 
-Map<String, dynamic> _$SimpleClassNullableToJson(
+Map<String, Object?> _$SimpleClassNullableToJson(
         SimpleClassNullable instance) =>
-    <String, dynamic>{
+    <String, Object?>{
       'value': instance.value?.inMicroseconds,
     };

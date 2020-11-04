@@ -17,8 +17,8 @@ StrictKeysObject _$StrictKeysObjectFromJson(Map json) {
   );
 }
 
-Map<String, dynamic> _$StrictKeysObjectToJson(StrictKeysObject instance) =>
-    <String, dynamic>{
+Map<String, Object?> _$StrictKeysObjectToJson(StrictKeysObject instance) =>
+    <String, Object?>{
       'value': instance.value,
       'custom_field': instance.customField,
     };

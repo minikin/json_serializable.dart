@@ -28,7 +28,7 @@ abstract class DecodeHelper implements HelperCore {
     assert(config.createFactory);
     final buffer = StringBuffer();
 
-    final mapType = config.anyMap ? 'Map' : 'Map<String, dynamic>';
+    final mapType = config.anyMap ? 'Map' : 'Map<String, Object?>';
     buffer.write('$targetClassReference '
         '${prefix}FromJson${genericClassArgumentsImpl(true)}'
         '($mapType json');

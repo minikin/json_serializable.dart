@@ -119,7 +119,7 @@ class JsonHelper extends TypeHelper<TypeHelperContextWithConfig> {
       if (context.config.anyMap) {
         output += ' as Map';
       } else {
-        output += ' as Map<String, dynamic>';
+        output += ' as Map<String, Object?>';
       }
     } else {
       return null;
