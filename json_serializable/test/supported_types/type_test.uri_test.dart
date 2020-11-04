@@ -14,7 +14,7 @@ import 'input.type_uri.dart';
 
 void main() {
   test('round trip', () {
-    final object = SimpleClass.fromJson(_emptyInput);
+    final object = SimpleClass.fromJson(_defaultInput);
     expect(loudEncode(object), loudEncode(_defaultOutput));
   });
 
@@ -28,7 +28,7 @@ void main() {
 final _defaultValue = 'https://example.com';
 final _altValue = 'https://dart.dev';
 
-final _emptyInput = <String, dynamic>{
+final _defaultInput = <String, Object?>{
   'value': _defaultValue,
 };
 

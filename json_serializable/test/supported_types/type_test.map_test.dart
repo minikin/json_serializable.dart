@@ -14,7 +14,7 @@ import 'input.type_map.dart';
 
 void main() {
   test('round trip', () {
-    final object = SimpleClass.fromJson(_emptyInput);
+    final object = SimpleClass.fromJson(_defaultInput);
     expect(loudEncode(object), loudEncode(_defaultOutput));
   });
 
@@ -28,7 +28,7 @@ void main() {
 final _defaultValue = {'a': 1};
 final _altValue = {'b': 2};
 
-final _emptyInput = <String, dynamic>{
+final _defaultInput = <String, Object?>{
   'value': _defaultValue,
 };
 
