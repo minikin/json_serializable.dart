@@ -139,14 +139,16 @@ class TestTypeData {
         .replaceAll('non-nullable', 'nullable')
         .replaceAll('SimpleClass', 'SimpleClassNullable');
 
+    final thrownError = type == customEnumType ? 'ArgumentError' : 'TypeError';
+
     final newGroupContent = groupContent.replaceAll(
       r'''
       final object = SimpleClass.fromJson({});
       expect(loudEncode(object), loudEncode(_nullableDefaultOutput));''',
-      r'''
+      '''
       expect(
         () => loudEncode(SimpleClass.fromJson({})),
-        throwsA(isA<TypeError>()),
+        throwsA(isA<$thrownError>()),
       );''',
     );
 
